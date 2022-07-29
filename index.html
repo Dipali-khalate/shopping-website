@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        *{padding:0%;margin: 0%; box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;}
+        body{
+            width: 100%;
+            /* height: 100vh; */
+            padding-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            background: #245;
+            /* flex-flow:column ; */
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav{
+            /* border: 1px solid red; */
+            width: 100%;
+            height: 70px;
+            transition: .4s;
+            z-index: 9;
+            position: fixed;
+            top: 0%;
+            background: #245;
+            right: 0;
+        }
+        nav ul{
+            display: flex;
+            position: absolute;
+            /* border: 1px solid red; */
+            right: 20PX;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        nav ul li{
+            list-style: none;
+            color: #fff;
+            cursor: pointer;
+            /* box-shadow:inset 0 0 20px #222; */
+            font-size: 14px;
+            transition: .4s;
+            font-weight: 1;
+            margin: 0 10px;
+            text-transform: uppercase;
+            padding: 6px 20px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.603);
+            border: 1px solid #fff;
+            border-top: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+        }
+        
+        nav ul li:hover{
+            box-shadow:inset 0 0 5px #fff, 0 0px 5px 1px rgba(255, 255, 255, 0.438), 0 7px 10px rgba(0, 0, 0, 0.603);
+        }
+
+        .navbtn{
+            width: 35px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 9;
+            display: none;
+            cursor: pointer;
+            flex-flow: column;
+            justify-content: space-between;
+            transition: .3s;
+ }
+        .navbtn span{
+            width: 100%;
+            height:4px;
+            transition: .3s;
+            /* border: 1px solid black; */
+            box-shadow: 0 0 3px #000;
+            background: #fff;
+            position: relative;
+        }
+        .close span:nth-child(1){
+            transform: rotate(45deg) translatex(18px);
+            box-shadow: none;
+            border-radius: 50%;
+        } 
+        .close span:nth-child(2){display: none;}
+        .close span:nth-child(3){
+            transform: rotate(-45deg) translatex(18px);
+            box-shadow: none;border-radius: 50%;
+        }  
+        .close .span{ border-radius: 50%;}
+        nav .logo{
+            width: 300px;
+            position: relative;
+            top: 0;
+            left:3%;
+            transition: .4s;
+        }
+        .logo img{
+            width: 100%;
+        }
+        .bgnd{
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            /* filter: blur(px); */
+            /* background: #245 url(../Yoshnas/d.jpg); */
+            /* background: linear-gradient(#000, #639); */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    @media only screen  and (max-width:900px){
+        nav{
+            height: 100vh;
+            backdrop-filter: blur(20px);
+            width: 100%;
+            background: rgba(255, 255, 255, 0.103);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbtn{display: flex;}
+        nav.expand{right: -100%;}
+        nav.expand ~ .navbtn{right: 20px;}
+        nav ul{
+            flex-flow: column;
+            right: auto;
+        }
+        nav ul li{
+            font-size: 16px;
+            margin-top: 40px;
+        }
+        nav ul li:hover{
+            transform: scale(1.05);
+        }
+        nav .logo{
+            left: 0%;
+            margin-top: -500px;
+        }
+    }
+    main{
+        width: 100%;
+        height: calc(100vh - 70px);
+        /* height: 100vh; */
+        position: relative;
+        bottom: 10px;
+        left: 0;
+        /* border-bottom: 20px solid red; */
+    }
+    main .products{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .products .product{
+        width: 200px;
+        height: 300px;
+        margin: 30px;
+        border-radius: 10px;
+        box-shadow:inset 10px 10px  10px rgba(0, 0, 0, 0.377),inset -10px -10px  10px rgba(255, 255, 255, 0.205), 0 10px 20px rgba(0, 0, 0, 0.788);
+        /* cursor: pointer; */
+        position: relative;
+        padding: 10px;
+        border: 1px solid #aaf;
+        overflow: hidden;
+        /* box-shadow:0 10px 20px rgba(0, 0, 0, 0.788); */
+    }
+    /* .products .product:nth-child(5){border-bottom: 5px solid red;} */
+    .products .product:nth-child(1){padding:10px 30px;}
+    .products .product:nth-child(1) img,
+    .products .product:nth-child(3) img,
+    .products .product:nth-child(4) img{bottom: 0%; top: auto;}
+    .products .product img{
+        width: 100%;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+    }
+    .about{
+        width: 100%;
+        height: 100%;
+        transition: .5s ease-in-out;
+        opacity: 0;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        background: rgba(0, 0, 0, 0.342);
+        background: linear-gradient(transparent 10%, #123 95%);
+        /* transform-origin: 0 0; */
+        /* transform: rotate(90deg); */
+    }
+    .product img{transition: .3s;}
+    .product:hover img{transform: scale(1.1);}
+    .product:hover .about{top: 0; opacity: 1;transform: rotate(0deg);}
+    .about .name, .about .price, .viewbtn{
+        width: 100%;
+        position: absolute;
+        /* top: 50%; */
+        left: 0;
+        font-size: 18px;
+        text-align: center;
+        color: #fff;
+        /* border: 1px solid red; */
+        text-shadow: 0 0 5px #000;
+    }
+    .closeviewbtn{
+        width: 140px;
+        height: 40px;
+        position: absolute;
+        bottom: 200px;
+        left: 75%;
+        transform: translateX(-50%);
+        transition: .3s;
+        background: rgb(10, 32, 43);
+        text-align: center;
+        cursor: pointer;
+        font-size: 24px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.699);
+        color: #f00;
+        border: 1px solid #fff;
+        border-radius: 15%;
+        line-height: 40px;
+    }
+    .closeviewbtn:hover{box-shadow:0  0 10px #f00, inset 0  0 10px #f00;text-shadow: 0  0 5px #f00;}
+    .about .name{
+        font-size: 18px;
+        top: 65%;
+    }
+    .about .price{
+        color: #0f0;
+        top: 75%;
+    }
+    .about .viewbtn{
+        bottom: 0;
+        background: transparent;
+        padding: 8px 0;
+        cursor: pointer;
+        color: rgb(255, 255, 255);
+        transition: .4s;
+        text-shadow:none;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+    .prdinfo .like{
+        /* right: 50%; */
+        /* transform: translateX(-50%); */
+        color: #fff;
+        z-index: 1;
+    }
+    .like{
+        width: 40px;
+        height: 40px;
+        -webkit-text-stroke: .4px  #fff;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        /* background: rgba(253, 253, 253, 0.219); */
+        text-align: center;
+        line-height: 43px;
+        font-size: 18px;
+        transition: .2s;
+        color: rgb(169, 170, 172);
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid #fff;
+    }
+     .like:hover{font-size: 20px;}
+    .like.liked{
+        color: #f00;
+        animation: liked .8s linear  both;
+    }
+    @keyframes liked{
+        0%{ box-shadow:0 0 1px 0.2px #f00, 0 0 1px 0.2px #f00;}
+        50%{box-shadow: 0 0 0 30px rgba(200,0,0,0), 0 0 10px 5px #f00;}
+    } 
+    .about .viewbtn:hover{text-decoration: underline;}
+    .viewer{
+        width: 0%;
+        height: 100vh;
+        overflow: hidden;
+        /* display: none; */
+        transition: .4s;
+        position: fixed;
+        top: 100%;
+        z-index: 10;
+        /* border: 1px solid #00f; */
+        left: 50%;
+        transform: translatex(-50%);
+        background: #245;
+    }
+    .mainimg{
+        width: 440px;
+        height: 550px;
+        position: relative;
+        top: 50%;
+        left: 50px;
+        transform: translatey(-50%);
+        /* overflow: hidden; */
+    }
+    .mainimg .mainimg_src{
+        width: 100%;
+        box-shadow:0 10px 20px rgba(0, 0, 0);
+        border-radius: 20px;
+        border: 1px solid #fff;
+        position: absolute;
+        top: 50%;
+        transform: translatey(-50%);
+
+    }
+    .imgopt1, .imgopt2 , .imgopt3{
+        width: 100px;
+        height: 150px;    
+        position: absolute;
+        cursor: pointer;
+        left: 520px;
+        /* border: 1px solid #fff; */
+    }
+    .imgopt1  img ,.imgopt2 img , .imgopt3 img{
+        width: 100%;
+        box-shadow:0 10px 20px rgba(0, 0, 0);
+        border-radius: 5px;
+        border: 1px solid #fff;
+        transition: .3s;
+        position: absolute;
+    }
+    .imgopt1  img:hover ,.imgopt2 img:hover , .imgopt3 img:hover{width:105%;}
+    .imgopt1{top: 110px;}
+    .imgopt2{top: 305px; }
+    .imgopt3{top: 500px;}
+
+    .viewer .prdinfo{
+        width: 40%;
+        height: 30%;
+        border-radius: 0px;
+        background: rgba(0, 0, 0, 0.301);
+        position: absolute;
+        top: 30%;
+        left: 750px;
+        transform: translateY(-50%);
+        border-top:2px solid rgba(255, 255, 255, 1);
+        border-bottom:2px solid rgba(255, 255, 255, 1);
+    } .prdinfo .like{
+        top: 70px;
+    }
+    .prdname{
+        width: 100%;
+        height: 40px;
+        text-shadow: 0 0 5px #000;
+        background:rgb(7, 23, 31) ;
+        position: absolute;
+        top: 10px;
+        font-size: 23px;
+        color: #fff;
+        line-height: 40px;
+        text-align: center;
+    }
+    .prdprice{
+        width: 50%;
+        height: 40PX;
+        font-size: 18px;
+        letter-spacing: 2px;
+        position: absolute;
+        top: 80px;
+        padding-left: 30px;
+        color: #0f0;
+        text-decoration: underline;
+    }
+    .buybtn{
+        width: 30%;
+        height: 40px;
+        text-shadow: 1px 1px 1px #111;
+        background: #fff;
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translatex(-50%);
+        text-align: center;
+        line-height: 35px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.568);
+        font-weight: 900;
+        color: #245;
+        transition: .3s;
+        border: 1px solid #111;
+        font-size: 23px;
+        border-radius: 20px;
+    }
+    .buybtn:hover{width: 35%;}
+    </style>
+</head>
+<body>
+    <div class="bgnd"></div>
+    <nav class="expand">
+        <div class="logo"><img src="../Yoshnas/logo2.png" alt=""></div>
+        <ul>
+            <li>Home</li>
+            <li>Account</li>
+            <li>Contact</li>
+            <li>About</li>
+            <li>T&C</li>
+        </ul>
+    </nav>
+    <div class="navbtn "onclick="viewpr('close')">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <main>
+        <div class="products" >
+            <div class="product" >
+                <img src="images/a.png" alt="">
+                <div class="about ab1">
+                    <div class="like" id="liked1" onclick="liked1.classList.toggle('liked')">&#10084;</div>
+                    <p class="name">Red Lehenga</p>
+                    <p class="price"> Rs. 22500/-</p>
+                    <div class="viewbtn" onclick="viewpr('pr1')">View</div>
+                </div>
+            </div>
+            <div class="product" >
+                <img src="images/b.png" alt="">
+                <div class="about ab2">
+                    <div class="like" id="liked2" onclick="liked2.classList.toggle('liked')">&#10084;</div>
+                    <p class="name">Yellow Lehenga</p>
+                    <p class="price">Rs. 15800/-</p>
+                    <div class="viewbtn" onclick="viewpr('pr2')">View</div>
+                </div>
+            </div>
+            <div class="product" >
+                <img src="images/c.png" alt="">
+                <div class="about ab3">
+                    <div class="like" id="liked3" onclick="liked3.classList.toggle('liked')">&#10084;</div>
+                    <p class="name">Floral Green Lehenga</p>
+                    <p class="price">Rs. 13920/-</p>
+                    <div class="viewbtn" onclick="viewpr('pr3')">View</div>
+                </div>
+            </div>
+            <div class="product" >
+                <img src="images/d.png" alt="">
+                <div class="about ab4">
+                    <div class="like" id="liked4" onclick="liked4.classList.toggle('liked')">&#10084;</div>
+                    <p class="name">Brown Lehenga</p>
+                    <p class="price">Rs. 14000/-</p>
+                    <div class="viewbtn" onclick="viewpr('pr4')">View</div>
+                </div>
+            </div>
+            <div class="product" >
+                <img src="images/e2.png" alt="">
+                <div class="about ab5">
+                    <div class="like" id="liked5" onclick="liked5.classList.toggle('liked')">&#10084;</div>
+                    <p class="name">Blue White Saree</p>
+                    <p class="price">Rs. 7200/-</p>
+                    <div class="viewbtn" onclick="viewpr('pr5')">View</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="viewer">
+        <div class="closeviewbtn" onclick="viewpr('closeview')">Go Back</div>
+        <div class="mainimg"><img class="mainimg_src" src="" alt=""></div>
+        <div class="imgopt1" onclick="viewpr('opt1tm')"><img class="opt1_src" src="" alt=""></div>
+        <div class="imgopt2" onclick="viewpr('opt2tm')"><img class="opt2_src" src="" alt=""></div>
+        <div class="imgopt3" onclick="viewpr('opt3tm')"><img class="opt3_src" src="" alt=""></div>
+        <div class="prdinfo">
+            
+            <div class="like" id="like5" onclick="like5.classList.toggle('liked')">&#10084;</div>
+            <p class="prdname"></p>
+            <p class="prdprice"></p>
+            <div class="buybtn">Buy Now</div>
+        </div>
+    </div>
+
+
+    <script>
+
+        
+        // navbtn.addEventListener('click', close);
+        // function close(){
+        //     navbtn.classList.toggle("close");
+        //     nav.classList.toggle("expand");
+        // }
+
+                        const mainarea = document.querySelector("main");
+                        const pdi = document.querySelector(".prdinfo");
+                        const navbtn = document.querySelector(".navbtn");
+                        const nav = document.querySelector("nav");
+                        const viewer = document.querySelector(".viewer");
+                        const mainimg = document.querySelector(".mainimg_src");
+                        const opt1 = document.querySelector(".opt1_src");
+                        const opt2 = document.querySelector(".opt2_src");
+                        const opt3 = document.querySelector(".opt3_src");
+
+                        const ab1 = document.querySelector(".ab1");
+                        const ab2 = document.querySelector(".ab2");
+                        const ab3 = document.querySelector(".ab3");
+                        const ab4 = document.querySelector(".ab4");
+                        const ab5 = document.querySelector(".ab5");
+
+                        // const name = document.querySelector(".name");
+                        // const price = document.querySelector(".price");
+                        const prdname = document.querySelector(".prdname");
+                        const prdprice = document.querySelector(".prdprice");
+                                                
+        function viewpr(a){
+            switch(a){
+                case 'pr1':{
+                    opt3.style.display ="block";
+                    mainimg.setAttribute('src', 'images/a.jpg');
+                    opt1.setAttribute('src','images/a.jpg');
+                    opt2.setAttribute('src','images/b.jpg');
+                    opt3.setAttribute('src','images/c.jpg');
+                    viewer.style= "display:block;width:100%;top:0%;";
+                    mainarea.style.display = "none";
+                    var ch = ab1.childNodes;
+                    prdprice.innerHTML = ch[5].innerHTML;
+                    prdname.innerHTML = ch[3].innerHTML;
+                    break;
+                }
+                case 'pr2':{
+                    opt3.style.display ="block";
+                    mainimg.setAttribute('src', 'images/b4.jpg');
+                    opt1.setAttribute('src','images/b4.jpg');
+                    opt2.setAttribute('src','images/b5.jpg');
+                    opt3.style.display ="none";
+                    viewer.style= "display:block;width:100%;top:0%;";
+                    mainarea.style.display = "none";
+                    var ch = ab2.childNodes;
+                    prdprice.innerHTML = ch[5].innerHTML;
+                    prdname.innerHTML = ch[3].innerHTML;
+                    break;
+                }
+                case 'pr3':{
+                    opt3.style.display ="block";
+                    mainimg.setAttribute('src', 'images/c3.jpg');
+                    opt1.setAttribute('src','images/c1.jpg');
+                    opt2.setAttribute('src','images/c3.jpg');
+                    opt3.setAttribute('src','images/c4.jpg');
+                    viewer.style= "display:block;width:100%;top:0%;";
+                    mainarea.style.display = "none";
+                    var ch = ab3.childNodes;
+                    prdprice.innerHTML = ch[5].innerHTML;
+                    prdname.innerHTML = ch[3].innerHTML;
+                    break;
+                }
+                case 'pr4':{
+                    mainimg.setAttribute('src', 'images/g.jpg');
+                    opt1.setAttribute('src','images/g.jpg');
+                    opt2.setAttribute('src','images/h.jpg');
+                    opt3.style.display ="none";
+                    viewer.style= "display:block;width:100%;top:0%;";
+                    mainarea.style.display = "none";
+                    var ch = ab4.childNodes;
+                    prdprice.innerHTML = ch[5].innerHTML;
+                    prdname.innerHTML = ch[3].innerHTML;
+                    break;
+                }
+                case 'pr5':{
+                    opt3.style.display ="block";
+                    mainimg.setAttribute('src', 'images/z.jpg');
+                    opt1.setAttribute('src','images/z.jpg');
+                    opt2.setAttribute('src','images/za.jpg');
+                    opt3.setAttribute('src','images/zb.jpg');
+                    viewer.style= "display:block;width:100%;top:0%;";
+                    mainarea.style.display = "none";
+                    var ch = ab5.childNodes;
+                    prdprice.innerHTML = ch[5].innerHTML;
+                    prdname.innerHTML = ch[3].innerHTML;
+                    
+                    break;
+                }
+                case 'opt1tm':{
+                    let optat = opt1.getAttribute('src');
+                    mainimg.setAttribute('src', optat);
+                    break;
+                }
+                case 'opt2tm':{
+                    let optat = opt2.getAttribute('src');
+                    mainimg.setAttribute('src', optat);
+                    break;
+                }
+                case 'opt3tm':{
+                    let optat = opt3.getAttribute('src');
+                    mainimg.setAttribute('src', optat);
+                    break;
+                }
+                case 'close':{
+                    navbtn.classList.toggle("close");
+                    nav.classList.toggle("expand");
+                    break;
+                }
+                case 'closeview':{
+                    viewer.style= "top:100%;";
+                    mainarea.style.display = "block";
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
